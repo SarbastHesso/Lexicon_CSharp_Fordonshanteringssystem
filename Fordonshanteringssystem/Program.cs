@@ -10,6 +10,8 @@ namespace Fordonshanteringssystem
     {
         static void Main(string[] args)
         {
+            //Vilken typ bör en lista vara för att rymma alla fordonstyper?
+            //    Det ska vara av typ Vehicle
             List<Vehicle> vehicles = new List<Vehicle>()
             {
                 new Car("BMW", "X5", 2020, 2100),
@@ -35,6 +37,9 @@ namespace Fordonshanteringssystem
                 try
                 {
                     vehicles.Add(handler.CreateVehicle("BMW", "X1", 2015, 1650, "Car"));
+                    //Vad händer om du försöker lägga till en Car i en lista av Motorcycle?
+                    //vehicles.Add(handler.CreateVehicle("Harley Davidson", "Sportster", 2017, 350, true));
+                    //No overload for method 'CreateVehicle' takes 6 arguments
                     handler.UpdateVehicle(vehicles[1], weight: 1400);
                     Console.WriteLine("Fordonet uppdaterades");
                 }
@@ -52,6 +57,11 @@ namespace Fordonshanteringssystem
                 }
 
                 Console.WriteLine("======== Loop genom vehicles med metoder ========");
+                //Kommer du åt metoden Clean() från en lista med typen List<Vehicle>?
+                //Vi kommer åt metoden bara om listan är ICleanable
+                //Vad är fördelarna med att använda ett interface här istället för arv?
+                //Det är flexibel, så vi kan använda det i klassarna vi vill
+                
                 foreach (Vehicle vehicle in vehicles)
                 {
                     Console.WriteLine(vehicle.Stats());
@@ -67,6 +77,7 @@ namespace Fordonshanteringssystem
             {
                 Console.WriteLine("Fel vid skapande av fordon: " + ex.Message);
             }
+            Console.ReadKey();
         }
     }
 }
